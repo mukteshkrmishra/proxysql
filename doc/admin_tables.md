@@ -155,7 +155,7 @@ The fields have the following semantics:
 * negate_match_pattern - if this is set to 1, only queries not matching the query text will be considered as a match. This acts as a NOT operator in front of the regular expression matching against match_pattern.
 * replace_pattern - this is the pattern with which to replace the matched pattern. It's done using RE2::Replace, so it's worth taking a look at the online documentation for that: https://github.com/google/re2/blob/master/re2/re2.h#L378. Note that this is optional, and when this is missing, the query processor will only cache/route this query without rewriting.
 * destination_hostgroup - route matched queries to this hostgroup. This happens unless there is a started transaction, and the logged in user has the transaction_persistent flag set to 1 (see `mysql_users` table).
-* cache_ttl - the number of seconds for which to cache the result of the query 
+* cache_ttl - the number of milliseconds for which to cache the result of the query. Note: in ProxySQL 1.1 cache_ttl was in seconds
 * reconnect - feature not used
 * timeout - the maximum timeout in milliseconds with which the matched or rewritten query should be executed. If a query run for longer than the specific threshold, the query is automatically killed. If timeout is not specified, global variable mysql-default_query_timeout applies 
 * delay - number of milliseconds to delay the execution of the query. This is essentially a throttling mechanism and QoS, allowing to give priority to some queries instead of others. This value is added to the `mysql-default_query_delay` global variable that applies to all queries. Future version of ProxySQL will provide a more advanced throttling mechanism.
